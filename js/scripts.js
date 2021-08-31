@@ -27,7 +27,7 @@ const bigAlert = "Wow that's big!";
 for (let i = 0; i < pokemonList.length; i++) {
   const name = pokemonList[i].name;
   const height = pokemonList[i].height;
-  document.write(`${name} (height:${height})`);
+  document.write(`${name} (height:` + height + ')');
   height > 1 && document.write(' ' + bigAlert);
   document.write('<br>')
 }
