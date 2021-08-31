@@ -1,3 +1,25 @@
-let favoriteFood = 'prickly pear';
-document.write(favoriteFood);
-alert('Hello World');
+let pokemonList = [
+  {
+    name: 'Genesect',
+    height: '1.5',
+    types: [
+      'bug',
+      'steel'
+    ]
+  },
+  {
+    name: 'Stunfisk',
+    height: '0.7',
+    types: [
+      'electric',
+      'ground'
+    ]
+  },
+  {
+    name: 'Chimchar',
+    height: '0.5',
+    types: [
+      'fire'
+    ]
+  },
+];
