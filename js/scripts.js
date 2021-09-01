@@ -23,16 +23,14 @@ let pokemonList = [
     ]
   },
 ];
-const bigPokemonText = "Wow that's big!";
-const PokemonListLength = pokemonList.length;
 let i = 0;
 
 //display pokemonList names and heights
-for (;i < PokemonListLength;) {
-  const name = pokemonList[i].name,
-      height = pokemonList[i].height;
-  let displayText = `${name} (height:` + height + ')';
-  height > 1 && (displayText = displayText + (' ' + bigPokemonText));
+for (; i < pokemonList.length;) {
+  const height = pokemonList[i].height;
+  let displayText = pokemonList[i].name + ' (height: ' + height + ')';
+  //check for adding big text:
+  height > 1 && (displayText = displayText + (' ' + "Wow that's big!"));
   document.write(displayText, '<br>');
   i++;
 }
