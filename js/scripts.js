@@ -23,11 +23,16 @@ let pokemonList = [
     ]
   },
 ];
-const bigAlert = "Wow that's big!";
-for (let i = 0; i < pokemonList.length; i++) {
-  const name = pokemonList[i].name;
-  const height = pokemonList[i].height;
-  document.write(`${name} (height:` + height + ')');
-  height > 1 && document.write(' ' + bigAlert);
-  document.write('<br>')
+const bigPokemonText = "Wow that's big!";
+const PokemonListLength = pokemonList.length;
+let i = 0;
+
+//display pokemonList names and heights
+for (;i < PokemonListLength;) {
+  const name = pokemonList[i].name,
+      height = pokemonList[i].height;
+  let displayText = `${name} (height:` + height + ')';
+  height > 1 && (displayText = displayText + (' ' + bigPokemonText));
+  document.write(displayText, '<br>');
+  i++;
 }
