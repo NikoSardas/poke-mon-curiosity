@@ -1,3 +1,29 @@
+
+:root {
+  --text-color: #8da9a6;
+  --background-color: #081217;
+  --background-color-light: #15313d;
+  --links-color: #c28b4a;
+  --font-weight: 200;
+  --font-weighted: 700;
+  --font-size-h1: 28px;
+  --font-size-h2: 24px;
+  --font-size-h3: 20px;
+  --font-size-text: 16px;
+  --line-height: 1.6;
+  --max-body-width: 1280px;
+  --reduced-opacity: 0.8;
+  --main-font: 'Oswald', sans-serif;
+  --secondary-font: 'Bilbo Swash Caps', sans-serif;
+  --grid-item-width: '%33';
+  --grid-gap: 20px;
+  --grid-margin: 20px;
+  --sun-horizontal: 30px;
+  --sun-vertical: -25px;
+  --cloud-one-horizontal: 0px;
+  --cloud-two-horizontal: 50px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,47 +35,76 @@ body {
 }
 
 body {
-  background-color: #031713;
-  color: #a59191;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 200;
-  font-size: 16px;
-  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--main-font);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size-text);
+  line-height: var(--line-height);
   display: flex;
   flex-direction: column;
-  max-width: 1280px;
+  max-width: var(--max-body-width);
   margin: auto;
 }
 
 h1 {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weighted);
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weighted);
 }
 
 h3 {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weighted);
+}
+
+button:hover,
+button:focus,
+.name-button:hover,
+.name-button:focus {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.name-button,
+button {
+  opacity: 1;
+  background-color: transparent;
+  color: var(--links-color);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 3px;
+  border: #23675c 1px solid;
+  transition: 0.2s opacity;
+  width: 200px;
 }
 
 #page-header {
-  background-color: #0f2f2c;
+  background-color: var(--background-color-light);
   text-align: center;
 }
 
 #logo {
-  font-family: 'Bilbo Swash Caps', sans-serif;
-
+  font-family: var(--secondary-font);
 }
 
-#main{
+#main {
   display: flex;
   flex-grow: 1;
 }
+
+#pokemon-list {
+  list-style-type: none;
+}
+
+#pokemon-list li {
+  margin-bottom: 5px;
+}
+
 .page-footer {
   display: flex;
   flex-direction: column;
