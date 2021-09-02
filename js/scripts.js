@@ -32,12 +32,8 @@ let pokemonRepository = (function () {
   function addPokemon(pokemon) {
     const pokemonKeys = Object.keys(pokemon);
     if (typeof pokemon === 'object') {
-      const parameterIsPokemon = (
-          pokemonKeys[0] === "name" &&
-          pokemonKeys[1] === "height" &&
-          pokemonKeys[2] === "types"
-      );
-      parameterIsPokemon && pokemonList.push(pokemon);
+      const parameterIsPokemon = (pokemonKeys[0] === "name" && pokemonKeys[1] === "height" && pokemonKeys[2] === "types");
+      parameterIsPokemon && pokemonList.push(pokemon);//push to array if passed validations
     } else {
       return false;
     }
@@ -50,25 +46,43 @@ let pokemonRepository = (function () {
       }
     }
 
-    let filterResult = pokemonList.filter(checkName);
+    let filterResult = pokemonList.filter(checkName);//return array of pokemonList validated elements to filterResult
     if (filterResult.length === 0) {
       filterResult = 'That Pokemon is not on the list!'
     }
     return filterResult;
   }
 
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function setButtonListener(btn, pokemon) {
+    function sendToShowDetails() {
+      showDetails(pokemon);//
+    }
+
+    btn.addEventListener('click', sendToShowDetails)
+  }
+
+  function addListItem(pokemon) { //populate a button list with objects from pokemonList
+    const pokemonListElement = document.querySelector("#pokemon-list");
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('name-button');
+    listItem.appendChild(button);
+    pokemonListElement.appendChild(listItem);
+    setButtonListener(button, pokemon);  //send list button to a dedicated addListener function
+  }
+
   return {
     getAllPokemons: getAllPokemons,
     addPokemon: addPokemon,
-    findPokemon: findPokemon
+    findPokemon: findPokemon,
+    addListItem: addListItem,
+    showDetails: showDetails
   }
 })()
+pokemonRepository.getAllPokemons().forEach(pokemonRepository.addListItem);
 
-function printPokemonDetails(pokemon) {
-  const height = pokemon.height;
-  let displayText = pokemon.name + ' (height: ' + height + ')';
-  height > 1 && (displayText = displayText + (' ' + "Wow that's big!"));
-  document.write(displayText, '<br>');
-}
-
-pokemonRepository.getAll().forEach(printPokemonDetails);
