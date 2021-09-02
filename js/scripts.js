@@ -1,71 +1,75 @@
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Genesect',
-      height: '1.5',
-      types: [
-        'bug',
-        'steel'
-      ]
-    },
-    {
-      name: 'Stunfisk',
-      height: '0.7',
-      types: [
-        'electric',
-        'ground'
-      ]
-    },
-    {
-      name: 'Chimchar',
-      height: '0.5',
-      types: [
-        'fire'
-      ]
-    },
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  function getAllPokemons() {
+  //return pokemonList
+  function getPokemonList() {
     return pokemonList;
   }
 
-  function addPokemon(pokemon) {
+  //validate and push into pokemonList array
+  function addPokemonToList(pokemon) {
     const pokemonKeys = Object.keys(pokemon);
     if (typeof pokemon === 'object') {
-      const parameterIsPokemon = (pokemonKeys[0] === "name" && pokemonKeys[1] === "height" && pokemonKeys[2] === "types");
+      const parameterIsPokemon = (
+          pokemonKeys[0] === "name" &&
+          pokemonKeys[1] === "detailsUrl"
+      );
       parameterIsPokemon && pokemonList.push(pokemon);//push to array if passed validations
     } else {
       return false;
     }
   }
 
-  function findPokemon(name) {
+  // return pokemon details from name parameter
+  function findPokemonInList(name) {
     function checkName(pokemon) {
       if (pokemon.name === name) {
         return pokemon;
       }
     }
 
-    let filterResult = pokemonList.filter(checkName);//return array of pokemonList validated elements to filterResult
+    //return array of validated pokemonList elements into filterResult
+    let filterResult = pokemonList.filter(checkName);
     if (filterResult.length === 0) {
       filterResult = 'That Pokemon is not on the list!'
     }
     return filterResult;
   }
 
-  function showDetails(pokemon) {
-    console.log(pokemon);
+  //
+  function loadPokemonDetails(pokemon) {
+    return fetch(pokemon.detailsUrl).then(function (response) {
+      return response.json().then(function (json) {
+        let thisPokemon = findPokemonInList(pokemon.name);
+        thisPokemon.imgUrl = json.imgUrl;
+        thisPokemon.height = json.height;
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
   }
 
+  //
+  function showPokemonDetails(pokemon) {
+    loadPokemonDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
+  }
+
+  //Since it's only used by addListItem,
+  // isn't it better to move the function inside addListItem?
   function setButtonListener(btn, pokemon) {
     function sendToShowDetails() {
-      showDetails(pokemon);//
+      showPokemonDetails(pokemon);//
     }
 
-    btn.addEventListener('click', sendToShowDetails)
+    btn.addEventListener('click', sendToShowDetails);
   }
 
-  function addListItem(pokemon) { //populate a button list with objects from pokemonList
+  //creates a list item with a button for the current pokemon parameter
+  //and sets a button listener
+  function addHTMLListItem(pokemon) {
     const pokemonListElement = document.querySelector("#pokemon-list");
     let listItem = document.createElement('li');
     let button = document.createElement('button');
@@ -73,16 +77,36 @@ let pokemonRepository = (function () {
     button.classList.add('name-button');
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
-    setButtonListener(button, pokemon);  //send list button to a dedicated addListener function
+    setButtonListener(button, pokemon);
+  }
+
+  //fetch items from api and send each to addPokemonToList
+  function loadApiIntoList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        showPokemonDetails(pokemon);
+        addPokemonToList(pokemon);
+      });
+      return true;
+    }).catch(function (e) {
+      console.error(e);
+    })
   }
 
   return {
-    getAllPokemons: getAllPokemons,
-    addPokemon: addPokemon,
-    findPokemon: findPokemon,
-    addListItem: addListItem,
-    showDetails: showDetails
-  }
+    addPokemonToList: addPokemonToList,
+    getPokemonList: getPokemonList,
+    addHTMLListItem: addHTMLListItem,
+    loadApiIntoList: loadApiIntoList
+  };
 })()
-pokemonRepository.getAllPokemons().forEach(pokemonRepository.addListItem);
 
+pokemonRepository.loadApiIntoList().then(function (response) {
+  response && pokemonRepository.getPokemonList().forEach(pokemonRepository.addHTMLListItem);
+});
