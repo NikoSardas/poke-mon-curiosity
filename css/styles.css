@@ -3,6 +3,7 @@
   --text-color: #8da9a6;
   --background-color: #081217;
   --background-color-light: #15313d;
+  --button-border-color: #1f495b 1px solid;
   --links-color: #c28b4a;
   --font-weight: 200;
   --font-weighted: 700;
@@ -36,6 +37,7 @@ body {
   line-height: var(--line-height);
   display: flex;
   flex-direction: column;
+  margin: auto;
   max-width: var(--max-body-width);
 }
 
@@ -70,7 +72,7 @@ button {
   text-decoration: none;
   padding: 20px;
   border-radius: 3px;
-  border: #23675c 1px solid;
+  border: var(--button-border-color);
   transition: 0.2s opacity;
   width: 100%;
 }
@@ -121,3 +123,7 @@ button {
   cursor: pointer;
 }
 
+
+@media all and (max-width: 500px) {
+
+}
