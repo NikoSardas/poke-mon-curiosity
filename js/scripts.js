@@ -25,21 +25,23 @@ let pokemonRepository = (function () {
     },
   ];
 
-  function getAll() {
+  function getAllPokemons() {
     return pokemonList;
   }
 
-  function add(pokemon) {
-    function checkPokemonKeys() {
-      const pokemonKeys = Object.keys(pokemon);
-      // return keyTest boolean
-      return (pokemonKeys[0] === "name" && pokemonKeys[1] === "height" && pokemonKeys[2] === "type");
+  function addPokemon(pokemon) {
+    const pokemonKeys = Object.keys(pokemon);
+    if (typeof pokemon === 'object') {
+      const parameterIsPokemon = (
+          pokemonKeys[0] === "name" &&
+          pokemonKeys[1] === "height" &&
+          pokemonKeys[2] === "types"
+      );
+      parameterIsPokemon && pokemonList.push(pokemon);
+    } else {
+      return false;
     }
-
-    // return pokemon if tests are validated
-    typeof pokemon === 'object' && checkPokemonKeys() && pokemonList.push(pokemon);
   }
-
 
   function findPokemon(name) {
     function checkName(pokemon) {
@@ -56,9 +58,9 @@ let pokemonRepository = (function () {
   }
 
   return {
-    getAll: getAll,
-    add: add,
-    find: findPokemon
+    getAllPokemons: getAllPokemons,
+    addPokemon: addPokemon,
+    findPokemon: findPokemon
   }
 })()
 
@@ -70,7 +72,3 @@ function printPokemonDetails(pokemon) {
 }
 
 pokemonRepository.getAll().forEach(printPokemonDetails);
-
-
-console.log(pokemonRepository.find('Stunfisk'));
-console.log(pokemonRepository.find('Stunkfisk'));
