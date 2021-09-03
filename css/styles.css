@@ -6,7 +6,7 @@
   --button-border: #1f495b 1px solid;
   --button-border-color-hover: #43a3cc;
   --links-color: #c28b4a;
-  --button-color-hover: #ffbc60;
+  --button-color-hover: #dca151;
   --button-background-color-active: #0e212a;
   --font-weight: 200;
   --font-weighted: 700;
@@ -155,6 +155,17 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+#show-modal {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: auto;
+}
+
+#modal-container {
+  text-align: center;
 }
 
 @media all and (max-width: 600px) {
