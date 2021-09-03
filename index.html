@@ -9,6 +9,7 @@
   <meta name="keywords"
         content="">
   <meta name="author" content="Niko Sardas">
+  <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
@@ -30,12 +31,12 @@
          onclick="window.open('https://www.github.com/NikoSardas')">
     <img src="img/LinkedIn_icon.svg" alt="linkedIn icon" class="social__icons"
          onclick="window.open('https://www.linkedin.com/in/niko-sardas-78316121b/')">
-  </div>
+</div>
 </header>
+<button id='show-modal' class="hidden">Show modal</button>
+<button id='show-dialog' class="hidden">Show dialog</button>
+<div id='modal-container'></div>
 <div id="main">
-  <button id='show-modal'>Show modal</button>
-  <button id='show-dialog'>Show dialog</button>
-  <div id='modal-container'></div>
   <h2 id="loadingMessage" class="hidden">LOADING..</h2>
   <ul id="pokemon-list">
 
