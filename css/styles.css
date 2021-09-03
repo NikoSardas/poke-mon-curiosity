@@ -3,8 +3,11 @@
   --text-color: #8da9a6;
   --background-color: #081217;
   --background-color-light: #15313d;
-  --button-border-color: #1f495b 1px solid;
+  --button-border: #1f495b 1px solid;
+  --button-border-color-hover: #43a3cc;
   --links-color: #c28b4a;
+  --button-color-hover: #ffbc60;
+  --button-background-color-active: #0e212a;
   --font-weight: 200;
   --font-weighted: 700;
   --font-size-h1: 28px;
@@ -56,14 +59,18 @@ h3 {
   font-weight: var(--font-weighted);
 }
 
+button:active {
+  background-color: var(--button-background-color-active);
+}
+
 button:hover,
 button:focus,
 .name-button:hover,
 .name-button:focus {
   cursor: pointer;
   /*opacity: 0.8;*/
-  border-color: #43a3cc;
-  color: #ffbc60;
+  border-color: var(--button-border-color-hover);
+  color: var(--button-color-hover);
 }
 
 .name-button,
@@ -74,7 +81,7 @@ button {
   text-decoration: none;
   padding: 20px;
   border-radius: 3px;
-  border: var(--button-border-color);
+  border: var(--button-border);
   transition: 0.2s opacity;
   width: 100%;
 }
@@ -88,15 +95,21 @@ button {
 #logo {
   font-family: var(--secondary-font);
 }
-.social-media{
+
+.social-media {
   position: absolute;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
 }
+
 .social__icons {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+  margin: 5px;
 }
 
 
@@ -129,23 +142,23 @@ button {
 
 .page-footer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: flex-end;
+  /*flex-direction: row;*/
+  /*align-items: center;*/
+  /*align-content: flex-end;*/
+}
+
+.hidden {
+  display: none;
+}
+
+#loadingMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 @media all and (max-width: 600px) {
   #pokemon-list li {
     width: 100%;
   }
-}
-
-.hidden{
-  display: none;
-}
-
-#loadingMessage{
-  position: absolute;
-  top: 50%;
-  left: 50%;
 }

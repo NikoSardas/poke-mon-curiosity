@@ -3,47 +3,51 @@ let pokemonRepository = (function () {
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   //return pokemonList
-  function getPokemonList() {
+  function getList() {
     return pokemonList;
   }
 
-  //validate and push into pokemonList array
-  function addPokemonToList(pokemon) {
-    const pokemonKeys = Object.keys(pokemon);
-    if (typeof pokemon === 'object') {
-      const parameterIsPokemon = (
-          pokemonKeys[0] === "name" &&
-          pokemonKeys[1] === "detailsUrl"
-      );
-      parameterIsPokemon && pokemonList.push(pokemon);//push to array if passed validations
-    } else {
-      return false;
-    }
+//fetch items from api and send each to add
+  function loadList() {
+    showLoadingMessage();
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url,
+          height: item.height,
+          weight: item.weight,
+          imgUrl: item.imgUrl,
+          abilities: item.abilities
+        };
+        showDetails(pokemon);
+        add(pokemon);
+      });
+      hideLoadingMessage();
+      return true;
+    }).catch(function (e) {
+      hideLoadingMessage();
+      console.error(e);
+    })
   }
 
-  // return pokemon details from name parameter
-  function findPokemonInList(name) {
-    function checkName(pokemon) {
-      if (pokemon.name === name) {
-        return pokemon;
-      }
-    }
-
-    //return array of validated pokemonList elements into filterResult
-    let filterResult = pokemonList.filter(checkName);
-    if (filterResult.length === 0) {
-      filterResult = 'That Pokemon is not on the list!'
-    }
-    return filterResult;
+//send pokemon to add more parameters then log returned pokemon with added parameters
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function (updatedPokemon) {
+      hideLoadingMessage();
+      console.log(updatedPokemon);
+    });
   }
 
-  //get parameter pokemon from api and add parameters to the same pokemon on the list
-  function loadPokemonDetails(pokemon) {
+//get parameter pokemon from api and add parameters to the same pokemon on the list
+  function loadDetails(pokemon) {
     showLoadingMessage();
     console.log(pokemon);
     return fetch(pokemon.detailsUrl).then(function (response) {
       return response.json().then(function (json) {
-        let thisPokemon = findPokemonInList(pokemon.name);
+        let thisPokemon = find(pokemon.name);
         thisPokemon[0].imgUrl = json.sprites.front_default;
         thisPokemon[0].height = json.height;
         thisPokemon[0].weight = json.weight;
@@ -58,27 +62,39 @@ let pokemonRepository = (function () {
     })
   }
 
-  //send pokemon to add more parameters then log returned pokemon with added parameters
-  function showPokemonDetails(pokemon) {
-    loadPokemonDetails(pokemon).then(function (updatedPokemon) {
-      hideLoadingMessage();
-      console.log(updatedPokemon);
-    });
+  //validate parameter and push it into pokemonList array
+  function add(pokemon) {
+    const pokemonKeys = Object.keys(pokemon);
+    if (typeof pokemon === 'object') {
+      const parameterIsPokemon = (
+          pokemonKeys[0] === "name" &&
+          pokemonKeys[1] === "detailsUrl"
+      );
+      parameterIsPokemon && pokemonList.push(pokemon);//push to array if passed validations
+    } else {
+      return false;
+    }
   }
 
-  //Since it's only used by addListItem,
-  // isn't it better to move the function inside addListItem?
-  function setButtonListener(btn, pokemon) {
-    function sendToShowDetails() {
-      showPokemonDetails(pokemon);//
+  // return pokemon details from name parameter
+  function find(name) {
+    function checkName(pokemon) {
+      if (pokemon.name === name) {
+        return pokemon;
+      }
     }
 
-    btn.addEventListener('click', sendToShowDetails);
+    //return array of validated pokemonList elements into filterResult
+    let filterResult = pokemonList.filter(checkName);
+    if (filterResult.length === 0) {
+      filterResult = 'That Pokemon is not on the list!'
+    }
+    return filterResult;
   }
 
   //creates a list item with a button for the current pokemon parameter
   //and sets a button listener
-  function addHTMLListItem(pokemon) {
+  function addListItem(pokemon) {
     const pokemonListElement = document.querySelector("#pokemon-list");
     let listItem = document.createElement('li');
     let button = document.createElement('button');
@@ -89,48 +105,33 @@ let pokemonRepository = (function () {
     setButtonListener(button, pokemon);
   }
 
-  //fetch items from api and send each to addPokemonToList
-  function loadApiIntoList() {
-    showLoadingMessage();
-    return fetch(apiUrl).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
-        let pokemon = {
-          name: item.name,
-          detailsUrl: item.url,
-          height: item.height,
-          weight: item.weight,
-          imgUrl: item.imgUrl,
-          abilities: item.abilities
-        };
-        showPokemonDetails(pokemon);
-        addPokemonToList(pokemon);
-      });
-      hideLoadingMessage();
-      return true;
-    }).catch(function (e) {
-      hideLoadingMessage();
-      console.error(e);
-    })
+  //add click listener to a pokemon button
+  function setButtonListener(btn, pokemon) {
+    function sendToShowDetails() {
+      showDetails(pokemon);//
+    }
+
+    btn.addEventListener('click', sendToShowDetails);
   }
 
+  // display a loading message while data is being loaded
   function showLoadingMessage() {
     document.querySelector("#loadingMessage").classList.remove('hidden');
   }
 
+  // hide a loading message when data finishes loading
   function hideLoadingMessage() {
     document.querySelector("#loadingMessage").classList.add('hidden');
   }
 
   return {
-    addPokemonToList: addPokemonToList,
-    getPokemonList: getPokemonList,
-    addHTMLListItem: addHTMLListItem,
-    loadApiIntoList: loadApiIntoList
+    add: add,
+    getList: getList,
+    addListItem: addListItem,
+    loadList: loadList
   };
 })()
 
-pokemonRepository.loadApiIntoList().then(function (response) {
-  response && pokemonRepository.getPokemonList().forEach(pokemonRepository.addHTMLListItem);
+pokemonRepository.loadList().then(function (response) {
+  response && pokemonRepository.getList().forEach(pokemonRepository.addListItem);
 });
