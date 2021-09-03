@@ -80,6 +80,7 @@ button {
 }
 
 #page-header {
+  position: relative;
   background-color: var(--background-color-light);
   text-align: center;
 }
@@ -87,6 +88,17 @@ button {
 #logo {
   font-family: var(--secondary-font);
 }
+.social-media{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.social__icons {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 
 #main {
   flex-grow: 1;
@@ -121,13 +133,6 @@ button {
   align-items: center;
   align-content: flex-end;
 }
-
-.social__icons {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
 
 @media all and (max-width: 600px) {
   #pokemon-list li {
