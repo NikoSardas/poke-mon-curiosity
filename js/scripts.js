@@ -37,23 +37,32 @@ let pokemonRepository = (function () {
     return filterResult;
   }
 
-  //
+  //get parameter pokemon from api and add parameters to the same pokemon on the list
   function loadPokemonDetails(pokemon) {
+    showLoadingMessage();
+    console.log(pokemon);
     return fetch(pokemon.detailsUrl).then(function (response) {
       return response.json().then(function (json) {
         let thisPokemon = findPokemonInList(pokemon.name);
-        thisPokemon.imgUrl = json.imgUrl;
-        thisPokemon.height = json.height;
+        thisPokemon[0].imgUrl = json.sprites.front_default;
+        thisPokemon[0].height = json.height;
+        thisPokemon[0].weight = json.weight;
+        thisPokemon[1] = json.abilities;
+        console.log(thisPokemon);
+        hideLoadingMessage();
+        return thisPokemon;
       });
     }).catch(function (e) {
+      hideLoadingMessage();
       console.error(e);
     })
   }
 
-  //
+  //send pokemon to add more parameters then log returned pokemon with added parameters
   function showPokemonDetails(pokemon) {
-    loadPokemonDetails(pokemon).then(function () {
-      console.log(pokemon);
+    loadPokemonDetails(pokemon).then(function (updatedPokemon) {
+      hideLoadingMessage();
+      console.log(updatedPokemon);
     });
   }
 
@@ -82,21 +91,36 @@ let pokemonRepository = (function () {
 
   //fetch items from api and send each to addPokemonToList
   function loadApiIntoList() {
+    showLoadingMessage();
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
-          detailsUrl: item.url
+          detailsUrl: item.url,
+          height: item.height,
+          weight: item.weight,
+          imgUrl: item.imgUrl,
+          abilities: item.abilities
         };
         showPokemonDetails(pokemon);
         addPokemonToList(pokemon);
       });
+      hideLoadingMessage();
       return true;
     }).catch(function (e) {
+      hideLoadingMessage();
       console.error(e);
     })
+  }
+
+  function showLoadingMessage() {
+    document.querySelector("#loadingMessage").classList.remove('hidden');
+  }
+
+  function hideLoadingMessage() {
+    document.querySelector("#loadingMessage").classList.add('hidden');
   }
 
   return {

@@ -61,7 +61,9 @@ button:focus,
 .name-button:hover,
 .name-button:focus {
   cursor: pointer;
-  opacity: 0.8;
+  /*opacity: 0.8;*/
+  border-color: #43a3cc;
+  color: #ffbc60;
 }
 
 .name-button,
@@ -106,6 +108,7 @@ button {
 
 #pokemon-list li {
   width: 250px;
+  margin: 5px;
   /*background-color: rebeccapurple;*/
   /*text-align: center;*/
   /*margin: 5px 50px;*/
@@ -126,6 +129,18 @@ button {
 }
 
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 600px) {
+  #pokemon-list li {
+    width: 100%;
+  }
+}
 
+.hidden{
+  display: none;
+}
+
+#loadingMessage{
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
