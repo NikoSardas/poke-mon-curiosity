@@ -8,6 +8,14 @@
   --links-color: #c28b4a;
   --button-color-hover: #dca151;
   --button-background-color-active: #0e212a;
+  --modal-background-color: #0e0e0e;
+  --modal-border-color: #c7c7c7;
+  --modal-text-color-: #afafaf;
+  --modal-title-color: #d5d5d5;
+  --modal-button-color: #8e8e8e;
+  --dialog-accept-color: #8e8e8e;
+  --dialog-reject-color: #8e8e8e;
+  --modal-button-background-color: #1f1f1f;
   --font-weight: 200;
   --font-weighted: 700;
   --font-size-h1: 28px;
@@ -29,6 +37,14 @@ html,
 body {
   height: 100%;
   user-select: none;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: #00000000;
 }
 
 body {
@@ -167,14 +183,34 @@ button {
   left: 50%;
 }
 
-#show-modal {
+#modal-container {
+  background-color: var(--modal-background-color);
+  color: var(--modal-text-color-);
+  border-color: var(--modal-border-color);
+}
+
+#modal-container h1 {
+  color: var(--modal-title-color);
+}
+
+#modal-container button {
+  color: var(--modal-button-color);
+  background-color: var(--modal-button-background-color);
+}
+
+#modal-container button:hover, #modal-container button:focus {
+  border-color: var(--modal-button-background-color);
+}
+
+
+#show-modal-button {
   position: absolute;
   top: 20px;
   left: 20px;
   width: auto;
 }
 
-#show-dialog {
+#show-dialog-button {
   position: absolute;
   top: 20px;
   left: 150px;

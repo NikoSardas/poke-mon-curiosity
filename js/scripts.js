@@ -36,7 +36,7 @@ let pokemonRepository = (function () {
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function (updatedPokemon) {
       hideLoadingMessage();
-      showModal(updatedPokemon)
+      modal.show(updatedPokemon)
     });
   }
 
@@ -122,6 +122,17 @@ let pokemonRepository = (function () {
     document.querySelector("#loadingMessage").classList.add('hidden');
   }
 
+
+  return {
+    add: add,
+    getList: getList,
+    addListItem: addListItem,
+    loadList: loadList
+  };
+})
+()
+let modal = (function () {
+
   // display the modal
   function showModal(pokemonObj) {
     //clear modalContainer
@@ -146,11 +157,11 @@ let pokemonRepository = (function () {
     imageElement.classList.add('pokemon-image');
     imageElement.src = pokemonObj[0].imgUrl;
     //append to DOM
-    modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(heightElement);
     modal.appendChild(weightElement);
     modal.appendChild(imageElement);
+    modal.appendChild(closeButtonElement);
     modalContainer.appendChild(modal);
     //show modal container
     modalContainer.classList.remove('hidden');
@@ -197,22 +208,22 @@ let pokemonRepository = (function () {
     })
   }
 
-  document.querySelector('#show-modal').addEventListener('click', () => {
-    showModal('Modal title', 'This is the modal content!');
+  document.querySelector('#show-modal-button').addEventListener('click', () => {
+    modal.show('Modal title', 'This is the modal content!');
   });
   document.querySelector('#modal-container').addEventListener('click', (e) => {
     if (e.target.id === 'modal-container') {
-      hideModal();
+      modal.hide();
     }
   })
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' &&
         !document.querySelector('#modal-container').classList.contains('hidden')) {
-      hideModal();
+      modal.hide();
     }
   });
-  document.querySelector('#show-dialog').addEventListener('click', () => {
-    showDialog('Confirm action', 'Are you sure you want to do this?').then(function () {
+  document.querySelector('#show-dialog-button').addEventListener('click', () => {
+    modal.showDialog('Confirm action', 'Are you sure you want to do this?').then(function () {
       alert(true);
     }, () => {
       alert(false);
@@ -220,14 +231,11 @@ let pokemonRepository = (function () {
   })
 
   return {
-    add: add,
-    getList: getList,
-    addListItem: addListItem,
-    loadList: loadList
-  };
-})
-()
-
+    show: showModal,
+    showDialog: showDialog,
+    hide: hideModal
+  }
+})()
 pokemonRepository.loadList().then(function (response) {
   response && pokemonRepository.getList().forEach(pokemonRepository.addListItem);
 });
