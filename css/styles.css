@@ -191,7 +191,16 @@ button {
 #modal h1 {
   color: var(--modal-title-color);
 }
-
+#modal-divs-container{
+  display: flex;
+}
+#pokemon-image{
+  width: 100%;
+  height: 100%;
+}
+#modal-divs-container div{
+  flex-grow: 1;
+}
 #modal button {
   color: var(--modal-button-color);
   border: none;

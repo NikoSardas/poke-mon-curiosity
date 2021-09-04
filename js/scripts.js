@@ -134,9 +134,15 @@ let modal = (function () {
     let modalContainer = document.querySelector('#modal-container');
     //empty container from previous modal
     modalContainer.innerHTML = '';
-    // create modal asd elements
+    // create modal and div elements
     let modal = document.createElement('div');
     modal.id = 'modal';
+    let modalDivContainer = document.createElement('div');
+    modalDivContainer.id = 'modal-divs-container';
+    let modalTextDiv = document.createElement('div');
+    modalTextDiv.id = 'modal-text-div';
+    let modalImageDiv = document.createElement('div');
+    modalImageDiv.id = 'modal-image-div';
     //close button
     let closeButtonElement = document.createElement('button');
     closeButtonElement.id = 'modal-close';
@@ -150,20 +156,23 @@ let modal = (function () {
     let heightElement = document.createElement('p');
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
-    //close button
+    //weight text
     let weightElement = document.createElement('p');
     weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
     //pokemon image
     let imageElement = document.createElement('img');
-    //set container to show only after image is loaded
+    imageElement.classList.add('pokemon-image');
+    imageElement.setAttribute('draggable', 'false');
+//set container to show only after image is loaded
     // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
-    imageElement.onload = function() {
-      imageElement.classList.add('pokemon-image');
-      imageElement.setAttribute('draggable', 'false');
+    imageElement.onload = function () {
       modal.appendChild(titleElement);
-      modal.appendChild(heightElement);
-      modal.appendChild(weightElement);
-      modal.appendChild(imageElement);
+      modal.appendChild(modalDivContainer);
+      modalDivContainer.appendChild(modalTextDiv);
+      modalDivContainer.appendChild(modalImageDiv);
+      modalTextDiv.appendChild(heightElement);
+      modalTextDiv.appendChild(weightElement);
+      modalImageDiv.appendChild(imageElement);
       modal.appendChild(closeButtonElement);
       modalContainer.appendChild(modal);
       modalContainer.classList.remove('hidden');
