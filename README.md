@@ -7,4 +7,4 @@ https://pokeapi.co/api/v2/pokemon/
 
 <h1>How to run</h1>
 
-www.nikosardas.com/nikoSardas_poke-mon-curiosity
+www.nikosardas.com/poke-mon-curiosity
