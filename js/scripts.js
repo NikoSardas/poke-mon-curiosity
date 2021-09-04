@@ -21,7 +21,7 @@ let pokemonRepository = (function () {
           weight: item.weight,
           imgUrl: item.imgUrl
         };
-        showDetails(pokemon);
+        // showDetails(pokemon);
         add(pokemon);
       });
       hideLoadingMessage();
@@ -122,23 +122,18 @@ let pokemonRepository = (function () {
     document.querySelector("#loadingMessage").classList.add('hidden');
   }
 
-
   return {
     add: add,
     getList: getList,
     addListItem: addListItem,
     loadList: loadList
   };
-})
-()
-let modal = (function () {
+})()
 
-  // display the modal
+let modal = (function () {
   function showModal(pokemonObj) {
-    //clear modalContainer
     let modalContainer = document.querySelector('#modal-container');
     modalContainer.innerHTML = '';
-    //add modal content
     let modal = document.createElement('div');
     modal.id = 'modal';
     let closeButtonElement = document.createElement('button');
@@ -155,21 +150,19 @@ let modal = (function () {
     weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
     let imageElement = document.createElement('img');
     imageElement.classList.add('pokemon-image');
+    imageElement.setAttribute('draggable', 'false');
     imageElement.src = pokemonObj[0].imgUrl;
-    //append to DOM
     modal.appendChild(titleElement);
     modal.appendChild(heightElement);
     modal.appendChild(weightElement);
     modal.appendChild(imageElement);
     modal.appendChild(closeButtonElement);
     modalContainer.appendChild(modal);
-    //show modal container
     modalContainer.classList.remove('hidden');
   }
 
   let dialogPromiseReject;
 
-  //hide the modal
   function hideModal() {
     let modalContainer = document.querySelector('#modal-container');
     modalContainer.classList.add('hidden');
@@ -179,24 +172,19 @@ let modal = (function () {
     }
   }
 
-  //show modal dialog buttons
   function showDialog(title, text) {
     showModal(title, text);
     let modalContainer = document.querySelector('#modal-container');
     let modal = modalContainer.querySelector('#modal');
-    //add dialog content
     let confirmButton = document.createElement('button');
     confirmButton.classList.add('modal-confirm');
     confirmButton.innerText = 'Confirm';
     let cancelButton = document.createElement('button');
     cancelButton.classList.add('modal-cancel');
     cancelButton.innerText = 'Cancel';
-    //append to DOM
     modal.appendChild(confirmButton);
     modal.appendChild(cancelButton);
-    //focus on confirm button
     confirmButton.focus();
-    // return promise after button click
     return new Promise((resolve, reject) => {
       cancelButton.addEventListener('click', hideModal);
       confirmButton.addEventListener('click', () => {
@@ -208,9 +196,6 @@ let modal = (function () {
     })
   }
 
-  document.querySelector('#show-modal-button').addEventListener('click', () => {
-    modal.show('Modal title', 'This is the modal content!');
-  });
   document.querySelector('#modal-container').addEventListener('click', (e) => {
     if (e.target.id === 'modal-container') {
       modal.hide();
@@ -222,13 +207,13 @@ let modal = (function () {
       modal.hide();
     }
   });
-  document.querySelector('#show-dialog-button').addEventListener('click', () => {
-    modal.showDialog('Confirm action', 'Are you sure you want to do this?').then(function () {
-      alert(true);
-    }, () => {
-      alert(false);
-    });
-  })
+  // document.querySelector('#show-dialog-button').addEventListener('click', () => {
+  //   modal.showDialog('Confirm action', 'Are you sure you want to do this?').then(function () {
+  //     alert(true);
+  //   }, () => {
+  //     alert(false);
+  //   });
+  // })
 
   return {
     show: showModal,
@@ -236,6 +221,7 @@ let modal = (function () {
     hide: hideModal
   }
 })()
+
 pokemonRepository.loadList().then(function (response) {
   response && pokemonRepository.getList().forEach(pokemonRepository.addListItem);
 });
