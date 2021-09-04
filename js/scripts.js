@@ -159,9 +159,6 @@ let modal = (function () {
     let heightElement = document.createElement('p');
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
-    //weight text
-    let weightElement = document.createElement('p');
-    weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
     //abilities
     pokemonObj[0].abilities.forEach(function (item) {
       let ability = document.createElement('p');
@@ -181,7 +178,6 @@ let modal = (function () {
       modalDivContainer.appendChild(modalTextDiv);
       modalDivContainer.appendChild(modalImageDiv);
       modalTextDiv.appendChild(heightElement);
-      modalTextDiv.appendChild(weightElement);
       modalImageDiv.appendChild(imageElement);
       modal.appendChild(closeButtonElement);
       modalContainer.appendChild(modal);

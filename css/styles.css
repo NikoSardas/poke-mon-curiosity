@@ -197,6 +197,7 @@ button {
 
 #modal-divs-container {
   display: flex;
+  flex-direction: column-reverse ;
 }
 
 #pokemon-image {
@@ -205,15 +206,13 @@ button {
 }
 
 #modal-divs-container div {
-  flex-grow: 1;
-  margin: 10px;
+  margin: 0;
 }
 
 #modal-abilities-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   width: 100%;
 }
 
