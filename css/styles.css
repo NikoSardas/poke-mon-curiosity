@@ -96,7 +96,7 @@ button {
   padding: 20px;
   border-radius: 3px;
   border: var(--button-border);
-  transition: 0.2s all ;
+  transition: 0.2s all;
   width: 100%;
 }
 
@@ -188,32 +188,39 @@ button {
   margin: 0 auto; /* Will not center vertically and won't work in IE6/7. */
   left: 0;
   right: 0;
-  top:25%;
+  top: 25%;
 }
+
 #modal h1 {
   color: var(--modal-title-color);
 }
-#modal-divs-container{
+
+#modal-divs-container {
   display: flex;
 }
-#pokemon-image{
+
+#pokemon-image {
   /*width: 250px;*/
   /*height: 250px;*/
 }
-#modal-divs-container div{
+
+#modal-divs-container div {
   flex-grow: 1;
   margin: 10px;
 }
-#modal-abilities-div{
+
+#modal-abilities-div {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
   width: 100%;
 }
-#modal-abilities-div p{
+
+#modal-abilities-div p {
   margin: 0 10px;
 }
+
 #modal button {
   color: var(--modal-button-color);
   border: none;
