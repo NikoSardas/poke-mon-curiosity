@@ -161,7 +161,7 @@ let modal = (function () {
     weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
     //pokemon image
     let imageElement = document.createElement('img');
-    imageElement.classList.add('pokemon-image');
+    imageElement.id = 'pokemon-image';
     imageElement.setAttribute('draggable', 'false');
 //set container to show only after image is loaded
     // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
