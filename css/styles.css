@@ -7,7 +7,7 @@
   --button-border-color-hover: #43a3cc;
   --links-color: #c28b4a;
   --button-color-hover: #dca151;
-  --button-background-color-active: #0e212a;
+  --button-background-color-active: #0a171e;
   --modal-background-color: #0e0e0e;
   --modal-border-color: #d9d9d9;
   --modal-text-color-: #9d9d9d;
@@ -84,21 +84,19 @@ button:focus,
 .name-button:hover,
 .name-button:focus {
   cursor: pointer;
-  /*opacity: 0.8;*/
   border-color: var(--button-border-color-hover);
   color: var(--button-color-hover);
 }
 
 .name-button,
 button {
-  opacity: 1;
   background-color: transparent;
   color: var(--links-color);
   text-decoration: none;
   padding: 20px;
   border-radius: 3px;
   border: var(--button-border);
-  transition: 0.2s opacity;
+  transition: 0.2s all ;
   width: 100%;
 }
 
@@ -122,8 +120,8 @@ button {
 }
 
 .social__icons {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   margin: 5px;
 }
@@ -133,16 +131,6 @@ button {
   flex-grow: 1;
   margin: 5px;
   display: flex;
-}
-
-#modal-container {
-  background-color: var(--background-color-light);
-  border: 4px solid #43a3cc;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  text-align: center;
 }
 
 #pokemon-list {
@@ -184,38 +172,50 @@ button {
 }
 
 #modal-container {
-  background-color: var(--modal-background-color);
-  color: var(--modal-text-color-);
-  border-color: var(--modal-border-color);
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
-#modal-container h1 {
+#modal {
+  background-color: var(--modal-background-color);
+  border: 4px solid;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+}
+#modal h1 {
   color: var(--modal-title-color);
 }
 
-#modal-container button {
+#modal button {
   color: var(--modal-button-color);
+  border: none;
+  outline: none;
   background-color: var(--modal-button-background-color);
+  transition: 0.2s background-color;
 }
 
-#modal-container button:hover, #modal-container button:focus {
+#modal button:hover, #modal button:focus {
   border-color: var(--modal-button-background-color);
+  background-color: var(--modal-background-color);
 }
 
+/*#show-modal-button {*/
+/*  position: absolute;*/
+/*  top: 20px;*/
+/*  left: 20px;*/
+/*  width: auto;*/
+/*}*/
 
-#show-modal-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: auto;
-}
-
-#show-dialog-button {
-  position: absolute;
-  top: 20px;
-  left: 150px;
-  width: auto;
-}
+/*#show-dialog-button {*/
+/*  position: absolute;*/
+/*  top: 20px;*/
+/*  left: 150px;*/
+/*  width: auto;*/
+/*}*/
 
 @media all and (max-width: 600px) {
   #pokemon-list li {

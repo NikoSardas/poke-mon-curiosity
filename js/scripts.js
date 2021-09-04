@@ -21,7 +21,7 @@ let pokemonRepository = (function () {
           weight: item.weight,
           imgUrl: item.imgUrl
         };
-        // showDetails(pokemon);
+        //send to validation and add to array
         add(pokemon);
       });
       hideLoadingMessage();
@@ -32,7 +32,7 @@ let pokemonRepository = (function () {
     })
   }
 
-  //send pokemon to add more parameters then log returned pokemon with added parameters
+  //send pokemon to loadDetails to add more parameters then send updated pokemon to modal
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function (updatedPokemon) {
       hideLoadingMessage();
@@ -51,7 +51,7 @@ let pokemonRepository = (function () {
         thisPokemon[0].height = json.height;
         thisPokemon[0].weight = json.weight;
         console.log(thisPokemon);
-        hideLoadingMessage();
+        // hideLoadingMessage();
         return thisPokemon;
       });
     }).catch(function (e) {
@@ -90,8 +90,7 @@ let pokemonRepository = (function () {
     return filterResult;
   }
 
-  //creates a list item with a button for the current pokemon parameter
-  //and sets a button listener
+  //creates a a button with the current pokemon name and sets a listener
   function addListItem(pokemon) {
     const pokemonListElement = document.querySelector("#pokemon-list");
     let listItem = document.createElement('li');
@@ -133,68 +132,79 @@ let pokemonRepository = (function () {
 let modal = (function () {
   function showModal(pokemonObj) {
     let modalContainer = document.querySelector('#modal-container');
+    //empty container from previous modal
     modalContainer.innerHTML = '';
+    // create modal asd elements
     let modal = document.createElement('div');
     modal.id = 'modal';
+    //close button
     let closeButtonElement = document.createElement('button');
     closeButtonElement.id = 'modal-close';
     closeButtonElement.innerText = 'Close';
     closeButtonElement.addEventListener('click', hideModal);
+    //create title
     let titleElement = document.createElement('h1');
     titleElement.innerText = pokemonObj[0].name;
     modalContainer.classList.remove('hidden');
+    //height text
     let heightElement = document.createElement('p');
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
     heightElement.innerText = 'Height: ' + pokemonObj[0].height;
+    //close button
     let weightElement = document.createElement('p');
     weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
+    //pokemon image
     let imageElement = document.createElement('img');
-    imageElement.classList.add('pokemon-image');
-    imageElement.setAttribute('draggable', 'false');
+    //set container to show only after image is loaded
+    // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
+    imageElement.onload = function() {
+      imageElement.classList.add('pokemon-image');
+      imageElement.setAttribute('draggable', 'false');
+      modal.appendChild(titleElement);
+      modal.appendChild(heightElement);
+      modal.appendChild(weightElement);
+      modal.appendChild(imageElement);
+      modal.appendChild(closeButtonElement);
+      modalContainer.appendChild(modal);
+      modalContainer.classList.remove('hidden');
+    }
     imageElement.src = pokemonObj[0].imgUrl;
-    modal.appendChild(titleElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(weightElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(closeButtonElement);
-    modalContainer.appendChild(modal);
-    modalContainer.classList.remove('hidden');
   }
 
-  let dialogPromiseReject;
+  // let dialogPromiseReject;
 
   function hideModal() {
     let modalContainer = document.querySelector('#modal-container');
     modalContainer.classList.add('hidden');
-    if (dialogPromiseReject) {
-      dialogPromiseReject();
-      dialogPromiseReject = null;
-    }
+    // if (dialogPromiseReject) {
+    //   dialogPromiseReject();
+    //   dialogPromiseReject = null;
+    // }
   }
 
-  function showDialog(title, text) {
-    showModal(title, text);
-    let modalContainer = document.querySelector('#modal-container');
-    let modal = modalContainer.querySelector('#modal');
-    let confirmButton = document.createElement('button');
-    confirmButton.classList.add('modal-confirm');
-    confirmButton.innerText = 'Confirm';
-    let cancelButton = document.createElement('button');
-    cancelButton.classList.add('modal-cancel');
-    cancelButton.innerText = 'Cancel';
-    modal.appendChild(confirmButton);
-    modal.appendChild(cancelButton);
-    confirmButton.focus();
-    return new Promise((resolve, reject) => {
-      cancelButton.addEventListener('click', hideModal);
-      confirmButton.addEventListener('click', () => {
-        dialogPromiseReject = null;
-        hideModal();
-        resolve();
-      })
-      dialogPromiseReject = reject;
-    })
-  }
+  // function showDialog(title, text) {
+  //   showModal(title, text);
+  //   let modalContainer = document.querySelector('#modal-container');
+  //   let modal = modalContainer.querySelector('#modal');
+  //   let confirmButton = document.createElement('button');
+  //   confirmButton.classList.add('modal-confirm');
+  //   confirmButton.innerText = 'Confirm';
+  //   let cancelButton = document.createElement('button');
+  //   cancelButton.classList.add('modal-cancel');
+  //   cancelButton.innerText = 'Cancel';
+  //   modal.appendChild(confirmButton);
+  //   modal.appendChild(cancelButton);
+  //   confirmButton.focus();
+  //   return new Promise((resolve, reject) => {
+  //     cancelButton.addEventListener('click', hideModal);
+  //     confirmButton.addEventListener('click', () => {
+  //       dialogPromiseReject = null;
+  //       hideModal();
+  //       resolve();
+  //     })
+  //     dialogPromiseReject = reject;
+  //   })
+  // }
 
   document.querySelector('#modal-container').addEventListener('click', (e) => {
     if (e.target.id === 'modal-container') {
@@ -217,11 +227,12 @@ let modal = (function () {
 
   return {
     show: showModal,
-    showDialog: showDialog,
+    // showDialog: showDialog,
     hide: hideModal
   }
 })()
 
+//load api into array. them use the array to display each pokemon button
 pokemonRepository.loadList().then(function (response) {
   response && pokemonRepository.getList().forEach(pokemonRepository.addListItem);
 });
