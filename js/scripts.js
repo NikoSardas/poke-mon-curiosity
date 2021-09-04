@@ -50,6 +50,7 @@ let pokemonRepository = (function () {
         thisPokemon[0].imgUrl = json.sprites.front_default;
         thisPokemon[0].height = json.height;
         thisPokemon[0].weight = json.weight;
+        thisPokemon[0].abilities = json.abilities;
         console.log(thisPokemon);
         // hideLoadingMessage();
         return thisPokemon;
@@ -143,6 +144,8 @@ let modal = (function () {
     modalTextDiv.id = 'modal-text-div';
     let modalImageDiv = document.createElement('div');
     modalImageDiv.id = 'modal-image-div';
+    let modalAbilitiesDiv = document.createElement('div');
+    modalAbilitiesDiv.id = 'modal-abilities-div';
     //close button
     let closeButtonElement = document.createElement('button');
     closeButtonElement.id = 'modal-close';
@@ -159,6 +162,12 @@ let modal = (function () {
     //weight text
     let weightElement = document.createElement('p');
     weightElement.innerText = 'Weight: ' + pokemonObj[0].weight;
+    //abilities
+    pokemonObj[0].abilities.forEach(function (item) {
+      let ability = document.createElement('p');
+      ability.innerText = item.ability.name;
+      modalAbilitiesDiv.appendChild(ability);
+    })
     //pokemon image
     let imageElement = document.createElement('img');
     imageElement.id = 'pokemon-image';
@@ -167,6 +176,7 @@ let modal = (function () {
     // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
     imageElement.onload = function () {
       modal.appendChild(titleElement);
+      modal.appendChild(modalAbilitiesDiv);
       modal.appendChild(modalDivContainer);
       modalDivContainer.appendChild(modalTextDiv);
       modalDivContainer.appendChild(modalImageDiv);

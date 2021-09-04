@@ -182,11 +182,13 @@ button {
 #modal {
   background-color: var(--modal-background-color);
   border: 4px solid;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  width: 50%;
   text-align: center;
+  position: fixed;
+  width: 320px;
+  margin: 0 auto; /* Will not center vertically and won't work in IE6/7. */
+  left: 0;
+  right: 0;
+  top:25%;
 }
 #modal h1 {
   color: var(--modal-title-color);
@@ -195,11 +197,22 @@ button {
   display: flex;
 }
 #pokemon-image{
-  width: 128px;
-  height: 128px;
+  /*width: 250px;*/
+  /*height: 250px;*/
 }
 #modal-divs-container div{
   flex-grow: 1;
+  margin: 10px;
+}
+#modal-abilities-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+#modal-abilities-div p{
+  margin: 0 10px;
 }
 #modal button {
   color: var(--modal-button-color);
