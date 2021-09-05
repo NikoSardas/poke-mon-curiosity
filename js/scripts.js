@@ -43,7 +43,6 @@ let pokemonRepository = (function () {
   //get parameter pokemon from api and add parameters to the same pokemon on the list
   function loadDetails(pokemon) {
     showLoadingMessage();
-    console.log(pokemon);
     return fetch(pokemon.detailsUrl).then(function (response) {
       return response.json().then(function (json) {
         let thisPokemon = find(pokemon.name);
@@ -51,7 +50,6 @@ let pokemonRepository = (function () {
         thisPokemon[0].height = json.height;
         thisPokemon[0].weight = json.weight;
         thisPokemon[0].abilities = json.abilities;
-        console.log(thisPokemon);
         // hideLoadingMessage();
         return thisPokemon;
       });
@@ -91,11 +89,18 @@ let pokemonRepository = (function () {
     return filterResult;
   }
 
-  //creates a a button with the current pokemon name and sets a listener
+  //creates a a button for the current pokemon name with a click listener and modal interaction
   function addListItem(pokemon) {
     const pokemonListElement = document.querySelector("#pokemon-list");
-    let listItem = document.createElement('li');
+    let listItem = document.createElement('div');
     let button = document.createElement('button');
+    listItem.classList.add('group-list-item');
+    listItem.classList.add('col-lg-3');
+    listItem.classList.add('col-sm-12');
+    listItem.classList.add('col-md-4');
+    button.classList.add('btn');
+    button.dataset.target = '#pokemon-modal';
+    button.dataset.toggle = 'modal';
     button.innerText = pokemon.name;
     button.classList.add('name-button');
     listItem.appendChild(button);
@@ -103,10 +108,10 @@ let pokemonRepository = (function () {
     setButtonListener(button, pokemon);
   }
 
-  //add click listener to a pokemon button
+  //click listener for a pokemon button
   function setButtonListener(btn, pokemon) {
     function sendToShowDetails() {
-      showDetails(pokemon);//
+      showDetails(pokemon);
     }
 
     btn.addEventListener('click', sendToShowDetails);
@@ -114,12 +119,12 @@ let pokemonRepository = (function () {
 
   // display a loading message while data is being loaded
   function showLoadingMessage() {
-    document.querySelector("#loadingMessage").classList.remove('hidden');
+    document.querySelector("#loadingMessage").classList.remove('d-none');
   }
 
   // hide a loading message when data finishes loading
   function hideLoadingMessage() {
-    document.querySelector("#loadingMessage").classList.add('hidden');
+    document.querySelector("#loadingMessage").classList.add('d-none');
   }
 
   return {
@@ -131,119 +136,44 @@ let pokemonRepository = (function () {
 })()
 
 let modal = (function () {
+  $('.modal').on('hidden.bs.modal', function () {
+    $('#height').text('');
+    $('#weight').text('');
+    $('.modal-title').text('');
+    $('#abilities').text('');
+    $('#pokemon-image').remove();
+  });
+
+  //show modal with parameter details
   function showModal(pokemonObj) {
-    let modalContainer = document.querySelector('#modal-container');
-    //empty container from previous modal
-    modalContainer.innerHTML = '';
-    // create modal and div elements
-    let modal = document.createElement('div');
-    modal.id = 'modal';
-    let modalDivContainer = document.createElement('div');
-    modalDivContainer.id = 'modal-divs-container';
-    let modalTextDiv = document.createElement('div');
-    modalTextDiv.id = 'modal-text-div';
-    let modalImageDiv = document.createElement('div');
-    modalImageDiv.id = 'modal-image-div';
-    let modalAbilitiesDiv = document.createElement('div');
-    modalAbilitiesDiv.id = 'modal-abilities-div';
-    //close button
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.id = 'modal-close';
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
-    //create title
-    let titleElement = document.createElement('h1');
-    titleElement.innerText = pokemonObj[0].name;
-    modalContainer.classList.remove('hidden');
-    //height text
-    let heightElement = document.createElement('p');
-    heightElement.innerText = 'Height: ' + pokemonObj[0].height;
-    heightElement.innerText = 'Height: ' + pokemonObj[0].height;
-    //abilities
-    pokemonObj[0].abilities.forEach(function (item) {
-      let ability = document.createElement('p');
-      ability.innerText = item.ability.name;
-      modalAbilitiesDiv.appendChild(ability);
-    })
-    //pokemon image
-    let imageElement = document.createElement('img');
+    console.log(pokemonObj[0]);
+    const name = pokemonObj[0].name;
+    const imageUrl = pokemonObj[0].imgUrl;
+    const abilities = pokemonObj[0].abilities;
+    const height = pokemonObj[0].height;
+    const weight = pokemonObj[0].weight;
+    const imageElement = document.createElement('img');
     imageElement.id = 'pokemon-image';
     imageElement.setAttribute('draggable', 'false');
-//set container to show only after image is loaded
-    // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
+    //load image before other details
     imageElement.onload = function () {
-      modal.appendChild(titleElement);
-      modal.appendChild(modalAbilitiesDiv);
-      modal.appendChild(modalDivContainer);
-      modalDivContainer.appendChild(modalTextDiv);
-      modalDivContainer.appendChild(modalImageDiv);
-      modalTextDiv.appendChild(heightElement);
-      modalImageDiv.appendChild(imageElement);
-      modal.appendChild(closeButtonElement);
-      modalContainer.appendChild(modal);
-      modalContainer.classList.remove('hidden');
+      $('.modal-title').text(name);
+      $('#height').text('Height: ' + height);
+      $('#weight').text('Weight: ' + weight);
+      // $('#abilities').text("Abilities: ");
+      abilities.forEach(function (item) {
+        const name = item.ability.name
+        $('#abilities').append(name + '<br>');
+      })
     }
-    imageElement.src = pokemonObj[0].imgUrl;
+    imageElement.src = imageUrl;
+    imageElement.setAttribute('alt', name + ' image');
+    $('#pokemon-image-container').append(imageElement);
+    // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
   }
-
-  // let dialogPromiseReject;
-
-  function hideModal() {
-    let modalContainer = document.querySelector('#modal-container');
-    modalContainer.classList.add('hidden');
-    // if (dialogPromiseReject) {
-    //   dialogPromiseReject();
-    //   dialogPromiseReject = null;
-    // }
-  }
-
-  // function showDialog(title, text) {
-  //   showModal(title, text);
-  //   let modalContainer = document.querySelector('#modal-container');
-  //   let modal = modalContainer.querySelector('#modal');
-  //   let confirmButton = document.createElement('button');
-  //   confirmButton.classList.add('modal-confirm');
-  //   confirmButton.innerText = 'Confirm';
-  //   let cancelButton = document.createElement('button');
-  //   cancelButton.classList.add('modal-cancel');
-  //   cancelButton.innerText = 'Cancel';
-  //   modal.appendChild(confirmButton);
-  //   modal.appendChild(cancelButton);
-  //   confirmButton.focus();
-  //   return new Promise((resolve, reject) => {
-  //     cancelButton.addEventListener('click', hideModal);
-  //     confirmButton.addEventListener('click', () => {
-  //       dialogPromiseReject = null;
-  //       hideModal();
-  //       resolve();
-  //     })
-  //     dialogPromiseReject = reject;
-  //   })
-  // }
-
-  document.querySelector('#modal-container').addEventListener('click', (e) => {
-    if (e.target.id === 'modal-container') {
-      modal.hide();
-    }
-  })
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' &&
-        !document.querySelector('#modal-container').classList.contains('hidden')) {
-      modal.hide();
-    }
-  });
-  // document.querySelector('#show-dialog-button').addEventListener('click', () => {
-  //   modal.showDialog('Confirm action', 'Are you sure you want to do this?').then(function () {
-  //     alert(true);
-  //   }, () => {
-  //     alert(false);
-  //   });
-  // })
 
   return {
-    show: showModal,
-    // showDialog: showDialog,
-    hide: hideModal
+    show: showModal
   }
 })()
 

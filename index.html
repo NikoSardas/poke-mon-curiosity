@@ -1,46 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <meta name="description"
-        content="">
-  <meta name="keywords"
-        content="">
-  <meta name="author" content="Niko Sardas">
-  <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+        crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/x-icon">
   <title>Niko Sardas - Poke-mon-Curiosity</title>
 </head>
 
 <body>
-<header id="page-header">
-  <h1 id="app-title">Poke-mon-Curiosity</h1>
-  <h2 id="logo">by Niko Sardas</h2>
-  <div class="social-media">
-    <img src="img/GitHub_icon.svg" alt="GitHub icon" class="social__icons"
-         onclick="window.open('https://www.github.com/NikoSardas')">
-    <img src="img/twitter_icon.svg" alt="twitter icon" class="social__icons"
-         onclick="window.open('https://www.github.com/NikoSardas')">
-    <img src="img/LinkedIn_icon.svg" alt="linkedIn icon" class="social__icons"
-         onclick="window.open('https://www.linkedin.com/in/niko-sardas-78316121b/')">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Poke-mon-Curiosity</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.github.com/NikoSardas">
+          <img src="img/GitHub_icon.svg" alt="GitHub icon" class="social__icons">
+          <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.github.com/NikoSardas">
+          <img src="img/twitter_icon.svg" alt="twitter icon" class="social__icons">
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="'https://www.linkedin.com/in/niko-sardas-78316121b/'">
+          <img src="img/LinkedIn_icon.svg" alt="linkedIn icon" class="social__icons">
+        </a>
+      </li>
+    </ul>
   </div>
-</header>
-<img id="loadingMessage" class="hidden" src="img/loading-buffering.gif" alt="LOADING..">
-<div id='modal-container' class="hidden"></div>
-<div id="main">
-  <ul id="pokemon-list">
-  </ul>
+</nav>
+<div id="pokemon-modal" class="modal container" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button id="modal-close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <p id="height"></p>
+            <p id="weight"></p>
+            <p id="abilities"></p>
+          </div>
+          <div id="pokemon-image-container" class="col-6">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pokemon-button-list container-fluid">
+  <div id="pokemon-list" class="row">
+  </div>
 </div>
 <footer class="page-footer">
+  <img id="loadingMessage" class="d-none" src="img/loading-buffering.gif" alt="LOADING..">
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 <script src="js/tota11y.min.js"></script>
 <script src="js/fetch.umd.js"></script>
 <script src="js/polyfill.min.js"></script>
