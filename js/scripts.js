@@ -165,7 +165,7 @@ let modal = (function () {
       $('#weight').text('Weight: ' + weight);
       abilities.forEach(function (item) {
         const name = item.ability.name
-        $('#abilities').append("<li>"+name + ' '+"</li>");
+        $('#abilities').append("<li>" + name + ' ' + "</li>");
       })
     }
     imageElement.src = imageUrl;

@@ -31,9 +31,11 @@ select,
 a {
   -webkit-tap-highlight-color: #00000000;
 }
-.modal{
+
+.modal {
   font-family: var(--main-font);
 }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -46,24 +48,25 @@ a {
   border: 0;
 }
 
-#pokemon-list button{
+#pokemon-list button {
   width: 100%;
   padding: 20px 0;
   background-color: transparent;
   color: var(--links-color);
   font-family: var(--main-font);
 }
-.pokemon-button-list .row>*{
+
+.pokemon-button-list .row > * {
   padding: 0;
 }
+
 #pokemon-list button:hover,
-#pokemon-list button:focus
-{
+#pokemon-list button:focus {
   border-color: var(--button-border-color-hover);
   color: var(--button-color-hover);
 }
 
-.modal-content{
+.modal-content {
   background-color: var(--modal-background-color);
   color: var(--modal-text-color-);
 }
