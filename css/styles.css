@@ -32,10 +32,6 @@ a {
   -webkit-tap-highlight-color: #00000000;
 }
 
-.modal {
-  font-family: var(--main-font);
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -48,16 +44,26 @@ a {
   border: 0;
 }
 
+.modal {
+  font-family: var(--main-font);
+}
+
+.modal-content {
+  background-color: var(--modal-background-color);
+  color: var(--modal-text-color-);
+}
+
 #pokemon-list button {
   width: 100%;
   padding: 20px 0;
+  margin: 2px 0 ;
   background-color: transparent;
   color: var(--links-color);
   font-family: var(--main-font);
 }
 
 .pokemon-button-list .row > * {
-  padding: 0;
+  padding: 2px;
 }
 
 #pokemon-list button:hover,
@@ -66,7 +72,14 @@ a {
   color: var(--button-color-hover);
 }
 
-.modal-content {
-  background-color: var(--modal-background-color);
-  color: var(--modal-text-color-);
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+#loadingMessage {
+  width: 64px;
+  height: 64px;
 }
