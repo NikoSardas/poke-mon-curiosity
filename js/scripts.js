@@ -95,14 +95,17 @@ let pokemonRepository = (function () {
     let listItem = document.createElement('div');
     let button = document.createElement('button');
     listItem.classList.add('group-list-item');
+    button.classList.add('btn');
+    button.classList.add('btn-primary');
+    button.classList.add('name-button');
+    button.innerText = pokemon.name;
+    //bootstrap target modal
+    button.dataset.target = '#pokemon-modal';
+    button.dataset.toggle = 'modal';
+    //bootstrap responsive grid
     listItem.classList.add('col-lg-3');
     listItem.classList.add('col-sm-12');
     listItem.classList.add('col-md-4');
-    button.classList.add('btn');
-    button.dataset.target = '#pokemon-modal';
-    button.dataset.toggle = 'modal';
-    button.innerText = pokemon.name;
-    button.classList.add('name-button');
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
     setButtonListener(button, pokemon);
@@ -160,10 +163,9 @@ let modal = (function () {
       $('.modal-title').text(name);
       $('#height').text('Height: ' + height);
       $('#weight').text('Weight: ' + weight);
-      // $('#abilities').text("Abilities: ");
       abilities.forEach(function (item) {
         const name = item.ability.name
-        $('#abilities').append(name + '<br>');
+        $('#abilities').append("<li>"+name + ' '+"</li>");
       })
     }
     imageElement.src = imageUrl;
