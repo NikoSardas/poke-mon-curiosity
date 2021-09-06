@@ -44,6 +44,12 @@ a {
   border: 0;
 }
 
+.navbar{
+  margin: 20px;
+}
+#navbarNavAltMarkup{
+  justify-content: center;
+}
 .modal {
   font-family: var(--main-font);
 }
