@@ -1,7 +1,7 @@
 
 
 <h2>Project description:</h2>
-(https://careerfoundry.com) training JavaScript app.
+https://careerfoundry.com fullstack web developer course JavaScript app (introduction to JavaScript).
 
 Fetches Pokemons and their data via API by request.
 
@@ -12,4 +12,4 @@ Validation:
 https://pokeapi.co/api/v2/pokemon/
 
 <h1>How to run</h1>
-www.nikosardas.com/poke-mon-curiosity
+https://nikosardas.github.io/poke-mon-curiosity
