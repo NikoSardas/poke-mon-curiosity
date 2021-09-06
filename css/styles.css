@@ -72,6 +72,14 @@ a {
   color: var(--button-color-hover);
 }
 
+.modal-title {
+  color: var(--modal-title-color);
+}
+
+.modal-close-button {
+  width: 100%;
+}
+
 .page-footer {
   position: fixed;
   bottom: 0;
