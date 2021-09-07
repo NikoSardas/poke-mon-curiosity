@@ -50,10 +50,6 @@ a {
   padding: 20px;
 }
 
-#navbarNavAltMarkup {
-  justify-content: center;
-}
-
 .modal {
   font-family: var(--main-font);
 }
