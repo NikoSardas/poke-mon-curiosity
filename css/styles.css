@@ -78,7 +78,9 @@ a {
   border-color: var(--button-border-color-hover);
   color: var(--button-color-hover);
 }
-
+#pokemon-image{
+  user-select: none;
+}
 .modal-title {
   color: var(--modal-title-color);
 }

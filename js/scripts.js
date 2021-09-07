@@ -7,54 +7,25 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  //fetch items from api and send each to add
+  //fetch items from api and send each to validation function
   function loadList() {
-    showLoadingMessage();
+    loadMessage(true);
     return fetch(apiUrl).then(function (response) {
+      //convert response object to json
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
-          detailsUrl: item.url,
-          height: item.height,
-          weight: item.weight,
-          imgUrl: item.imgUrl
+          detailsUrl: item.url
         };
-        //send to validation and add to array
+        //send to add() for validations and to push into the array
         add(pokemon);
       });
-      hideLoadingMessage();
+      loadMessage(false);
       return true;
     }).catch(function (e) {
-      hideLoadingMessage();
-      console.error(e);
-    })
-  }
-
-  //send pokemon to loadDetails to add more parameters then send updated pokemon to modal
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function (updatedPokemon) {
-      hideLoadingMessage();
-      modal.show(updatedPokemon)
-    });
-  }
-
-  //get parameter pokemon from api and add parameters to the same pokemon on the list
-  function loadDetails(pokemon) {
-    showLoadingMessage();
-    return fetch(pokemon.detailsUrl).then(function (response) {
-      return response.json().then(function (json) {
-        let thisPokemon = find(pokemon.name);
-        thisPokemon[0].imgUrl = json.sprites.front_default;
-        thisPokemon[0].height = json.height;
-        thisPokemon[0].weight = json.weight;
-        thisPokemon[0].abilities = json.abilities;
-        // hideLoadingMessage();
-        return thisPokemon;
-      });
-    }).catch(function (e) {
-      hideLoadingMessage();
+      loadMessage(false);
       console.error(e);
     })
   }
@@ -67,10 +38,37 @@ let pokemonRepository = (function () {
           pokemonKeys[0] === "name" &&
           pokemonKeys[1] === "detailsUrl"
       );
-      parameterIsPokemon && pokemonList.push(pokemon);//push to array if passed validations
+      //push to array if passed validations
+      parameterIsPokemon && pokemonList.push(pokemon);
     } else {
       return false;
     }
+  }
+
+  //send pokemon parameter to modal
+  function showDetails(pokemon) {
+    //add further parameter details before sending updated pokemon to modal
+    loadDetails(pokemon).then(function (updatedPokemon) {
+      modal.show(updatedPokemon)
+    });
+  }
+
+  //add pokemon parameters from api
+  function loadDetails(pokemon) {
+    //fetch specific pokemon by url
+    return fetch(pokemon.detailsUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+        let thisPokemon = find(pokemon.name);
+        //add parameters to pokemon
+        thisPokemon[0].imgUrl = json.sprites.front_default;
+        thisPokemon[0].height = json.height;
+        thisPokemon[0].weight = json.weight;
+        thisPokemon[0].abilities = json.abilities;
+        return thisPokemon;
+    }).catch(function (e) {
+      console.error(e);
+    })
   }
 
   // return pokemon details from name parameter
@@ -89,52 +87,44 @@ let pokemonRepository = (function () {
     return filterResult;
   }
 
-  //creates a a button for the current pokemon name with a click listener and modal interaction
+  //create a display button from the pokemon parameter
   function addListItem(pokemon) {
-    const pokemonListElement = document.querySelector("#pokemon-list");
     let listItem = document.createElement('div');
     let button = document.createElement('button');
+    //create list to nest button
     listItem.classList.add('group-list-item');
+    listItem.classList.add('col-lg-3');
+    listItem.classList.add('col-sm-12');
+    listItem.classList.add('col-md-4');
+    //create button
     button.classList.add('btn');
     button.classList.add('btn-primary');
     button.classList.add('name-button');
     button.innerText = pokemon.name;
-    //bootstrap target modal
     button.dataset.target = '#pokemon-modal';
     button.dataset.toggle = 'modal';
-    //bootstrap responsive grid
-    listItem.classList.add('col-lg-3');
-    listItem.classList.add('col-sm-12');
-    listItem.classList.add('col-md-4');
+    //append to DOM
     listItem.appendChild(button);
-    pokemonListElement.appendChild(listItem);
-    setButtonListener(button, pokemon);
-  }
-
-  //click listener for a pokemon button
-  function setButtonListener(btn, pokemon) {
-    function sendToShowDetails() {
+    document.querySelector("#pokemon-list").appendChild(listItem);
+    //set button listener
+    button.addEventListener('click', function sendToShowDetails() {
+      loadMessage(true);
       showDetails(pokemon);
-    }
-
-    btn.addEventListener('click', sendToShowDetails);
+    });
   }
 
-  // display a loading message while data is being loaded
-  function showLoadingMessage() {
-    document.querySelector("#loadingMessage").classList.remove('d-none');
-  }
-
-  // hide a loading message when data finishes loading
-  function hideLoadingMessage() {
-    document.querySelector("#loadingMessage").classList.add('d-none');
+  // toggle load message display
+  function loadMessage(state) {
+    let loadMessage = $("#loadingMessage");
+    state ? loadMessage.removeClass('d-none') : loadMessage.addClass('d-none');
   }
 
   return {
     add: add,
     getList: getList,
     addListItem: addListItem,
-    loadList: loadList
+    loadList: loadList,
+    loadMessage:loadMessage
   };
 })()
 
@@ -149,29 +139,22 @@ let modal = (function () {
 
   //show modal with parameter details
   function showModal(pokemonObj) {
-    console.log(pokemonObj[0]);
-    const name = pokemonObj[0].name;
-    const imageUrl = pokemonObj[0].imgUrl;
-    const abilities = pokemonObj[0].abilities;
-    const height = pokemonObj[0].height;
-    const weight = pokemonObj[0].weight;
+    //create image container
     const imageElement = document.createElement('img');
     imageElement.id = 'pokemon-image';
-    imageElement.setAttribute('draggable', 'false');
-    //load image before other details
+    imageElement.setAttribute('alt',  pokemonObj[0].name + ' image');
+    $('#pokemon-image-container').append(imageElement);
+    //load other details after image done loading
     imageElement.onload = function () {
-      $('.modal-title').text(name);
-      $('#height').text('Height: ' + height);
-      $('#weight').text('Weight: ' + weight);
-      abilities.forEach(function (item) {
-        const name = item.ability.name
-        $('#abilities').append("<li>" + name + ' ' + "</li>");
+      $('.modal-title').text(pokemonObj[0].name);
+      $('#height').text('Height: ' + pokemonObj[0].height);
+      $('#weight').text('Weight: ' + pokemonObj[0].weight);
+      pokemonObj[0].abilities.forEach(function (item) {
+        $('#abilities').append("<li>" + item.ability.name + ' ' + "</li>");
       })
     }
-    imageElement.src = imageUrl;
-    imageElement.setAttribute('alt', name + ' image');
-    $('#pokemon-image-container').append(imageElement);
-    // (https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript)
+    imageElement.src = pokemonObj[0].imgUrl;
+    pokemonRepository.loadMessage(false);
   }
 
   return {
@@ -179,7 +162,7 @@ let modal = (function () {
   }
 })()
 
-//load api into array. them use the array to display each pokemon button
+//load api into array then send each pokemon to the display list
 pokemonRepository.loadList().then(function (response) {
   response && pokemonRepository.getList().forEach(pokemonRepository.addListItem);
 });
