@@ -147,6 +147,7 @@ const modal = (function () {
     const imageElement = document.createElement('img')
     imageElement.id = 'pokemon-image'
     imageElement.setAttribute('alt', pokemonObj[0].name + ' image')
+    imageElement.setAttribute('draggable', 'false')
     $('#pokemon-image-container').append(imageElement)
     // load other details after image done loading
     imageElement.onload = function () {
