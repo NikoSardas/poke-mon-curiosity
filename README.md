@@ -9,5 +9,5 @@ The project involves: HTML/CSS/JavaScript/Bootstrap/jQuery<br>
 Validations:<br>
 API: https://pokeapi.co/api/v2/pokemon/<br>
 
-Hosted app: https://nikosardas.github.io/poke-mon-curiosity
+Live app: https://nikosardas.github.io/poke-mon-curiosity
 
