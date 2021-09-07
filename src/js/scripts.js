@@ -35,8 +35,8 @@ let pokemonRepository = (function () {
     const pokemonKeys = Object.keys(pokemon);
     if (typeof pokemon === 'object') {
       const parameterIsPokemon = (
-          pokemonKeys[0] === "name" &&
-          pokemonKeys[1] === "detailsUrl"
+        pokemonKeys[0] === "name" &&
+        pokemonKeys[1] === "detailsUrl"
       );
       //push to array if passed validations
       parameterIsPokemon && pokemonList.push(pokemon);
@@ -59,13 +59,13 @@ let pokemonRepository = (function () {
     return fetch(pokemon.detailsUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
-        let thisPokemon = find(pokemon.name);
-        //add parameters to pokemon
-        thisPokemon[0].imgUrl = json.sprites.front_default;
-        thisPokemon[0].height = json.height;
-        thisPokemon[0].weight = json.weight;
-        thisPokemon[0].abilities = json.abilities;
-        return thisPokemon;
+      let thisPokemon = find(pokemon.name);
+      //add parameters to pokemon
+      thisPokemon[0].imgUrl = json.sprites.front_default;
+      thisPokemon[0].height = json.height;
+      thisPokemon[0].weight = json.weight;
+      thisPokemon[0].abilities = json.abilities;
+      return thisPokemon;
     }).catch(function (e) {
       console.error(e);
     })
@@ -124,7 +124,7 @@ let pokemonRepository = (function () {
     getList: getList,
     addListItem: addListItem,
     loadList: loadList,
-    loadMessage:loadMessage
+    loadMessage: loadMessage
   };
 })()
 
@@ -142,13 +142,13 @@ let modal = (function () {
     //create image container
     const imageElement = document.createElement('img');
     imageElement.id = 'pokemon-image';
-    imageElement.setAttribute('alt',  pokemonObj[0].name + ' image');
+    imageElement.setAttribute('alt', pokemonObj[0].name + ' image');
     $('#pokemon-image-container').append(imageElement);
     //load other details after image done loading
     imageElement.onload = function () {
       $('.modal-title').text(pokemonObj[0].name);
-      $('#height').text('Height: ' + pokemonObj[0].height);
-      $('#weight').text('Weight: ' + pokemonObj[0].weight);
+      $('#height').text(`Height: ${pokemonObj[0].height}`);
+      $('#weight').text(`Weight: ${pokemonObj[0].weight}`);
       pokemonObj[0].abilities.forEach(function (item) {
         $('#abilities').append("<li>" + item.ability.name + ' ' + "</li>");
       })

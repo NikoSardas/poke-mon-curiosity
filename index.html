@@ -1,75 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="src/css/bootstrap.min.css">
+  <link rel="stylesheet" href="src/css/styles.css">
   <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/x-icon">
   <title>Niko Sardas - Poke-mon-Curiosity</title>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="navbar-brand">Poke-mon-Curiosity</div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link disabled" href="#">Niko Sardas 2022</a>
-      <a class="nav-item nav-link link" href="https://www.nikosardas.com/">Portfolio <span class="sr-only">link to author's portfolio page</span></a>
-      <a class="nav-item nav-link link" href="https://github.com/NikoSardas">GitHub <span class="sr-only">link to author's GitHub page</span></a>
-      <a class="nav-item nav-link link" href="https://www.linkedin.com/in/niko-sardas-78316121b/">linkedIn <span
-              class="sr-only">link to author's linkedIn page</span></a>
-    </div>
-  </div>
-</nav>
-<div id="pokemon-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content container border-light">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">X</span>
-        </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-brand">Poke-mon-Curiosity</div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link disabled" href="#">Niko Sardas 2022</a>
+        <a class="nav-item nav-link link" href="https://www.nikosardas.com/">Portfolio <span class="sr-only">link to
+            author's portfolio page</span></a>
+        <a class="nav-item nav-link link" href="https://github.com/NikoSardas">GitHub <span class="sr-only">link to
+            author's GitHub page</span></a>
+        <a class="nav-item nav-link link" href="https://www.linkedin.com/in/niko-sardas-78316121b/">linkedIn <span
+            class="sr-only">link to author's linkedIn page</span></a>
       </div>
-      <div class="modal-body row">
-        <ul id="abilities" class="col-4"></ul>
-        <div id="pokemon-image-container" class="col-4 "></div>
-        <div class="col-4">
-          <p id="height"></p>
-          <p id="weight"></p>
+    </div>
+  </nav>
+  <div id="pokemon-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content container border-light">
+        <div class="modal-header">
+          <h3 class="modal-title"></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">X</span>
+          </button>
+        </div>
+        <div class="modal-body row">
+          <div id="pokemon-image-container" class="col-12 text-center"></div>
+          <div class="col-6">
+            <h5>Abilities</h5>
+            <ul id="abilities"></ul>
+          </div>
+          <div class="col-6">
+            <h5>Details</h5>
+            <ul>
+              <li id="height"></li>
+              <li id="weight"></li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-button" data-dismiss="modal">Close</button>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close-button" data-dismiss="modal">Close</button>
-      </div>
     </div>
   </div>
-</div>
-<div class="pokemon-button-list container">
-  <div id="pokemon-list" class="row">
+  <div class="pokemon-button-list container">
+    <div id="pokemon-list" class="row">
+    </div>
   </div>
-</div>
-<footer class="page-footer">
-  <img id="loadingMessage" class="d-none" src="img/loading-buffering.gif" alt="LOADING..">
-</footer>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-<script src="js/fetch.umd.js"></script>
-<script src="js/polyfill.min.js"></script>
-<script src="js/scripts.js"></script>
+  <footer class="page-footer">
+    <img id="loadingMessage" class="d-none" src="img/loading-buffering.gif" alt="LOADING..">
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+  </script>
+  <script src="src/js/fetch.umd.js"></script>
+  <script src="src/js/polyfill.min.js"></script>
+  <script src="src/js/scripts.js"></script>
 </body>
 
 </html>
