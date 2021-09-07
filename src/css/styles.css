@@ -40,17 +40,20 @@ a {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap; /* added line */
+  white-space: nowrap;
+  /* added line */
   border: 0;
 }
 
-.navbar{
+.navbar {
   margin: 20px;
   padding: 20px;
 }
-#navbarNavAltMarkup{
+
+#navbarNavAltMarkup {
   justify-content: center;
 }
+
 .modal {
   font-family: var(--main-font);
 }
@@ -58,6 +61,10 @@ a {
 .modal-content {
   background-color: var(--modal-background-color);
   color: var(--modal-text-color-);
+}
+
+h5 {
+  color: var(--modal-title-color)
 }
 
 #pokemon-list button {
@@ -69,7 +76,7 @@ a {
   font-family: var(--main-font);
 }
 
-.pokemon-button-list .row > * {
+.pokemon-button-list .row>* {
   padding: 2px;
 }
 
@@ -77,6 +84,10 @@ a {
 #pokemon-list button:focus {
   border-color: var(--button-border-color-hover);
   color: var(--button-color-hover);
+}
+
+#pokemon-image {
+  user-select: none;
 }
 
 .modal-title {
