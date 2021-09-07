@@ -46,6 +46,7 @@ a {
 
 .navbar{
   margin: 20px;
+  padding: 20px;
 }
 #navbarNavAltMarkup{
   justify-content: center;
