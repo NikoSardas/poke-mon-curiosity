@@ -14,8 +14,8 @@
   --modal-button-color: #8e8e8e;
   --modal-button-background-color: #1f1f1f;
   --reduced-opacity: 0.8;
-  --main-font: 'Oswald', sans-serif;
-  --secondary-font: 'Bilbo Swash Caps', sans-serif;
+  --main-font: "Oswald", sans-serif;
+  --secondary-font: "Bilbo Swash Caps", sans-serif;
 }
 
 html,
@@ -29,7 +29,7 @@ textarea,
 button,
 select,
 a {
-  -webkit-tap-highlight-color: #00000000;
+  -webkit-tap-highlight-color: #0000;
 }
 
 .sr-only {
@@ -41,7 +41,6 @@ a {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  /* added line */
   border: 0;
 }
 
@@ -55,12 +54,20 @@ a {
 }
 
 .modal-content {
+  min-height: 300px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 360px;
   background-color: var(--modal-background-color);
   color: var(--modal-text-color-);
 }
 
+.modal-content.loaded {
+  opacity: 1;
+}
+
 h5 {
-  color: var(--modal-title-color)
+  color: var(--modal-title-color);
 }
 
 #pokemon-list button {
@@ -72,7 +79,7 @@ h5 {
   font-family: var(--main-font);
 }
 
-.pokemon-button-list .row>* {
+.pokemon-button-list .row > * {
   padding: 2px;
 }
 
@@ -84,9 +91,12 @@ h5 {
 
 #pokemon-image {
   user-select: none;
+  height: 100px;
+  width: 100px;
 }
 
 .modal-title {
+  min-height: 64px;
   color: var(--modal-title-color);
 }
 

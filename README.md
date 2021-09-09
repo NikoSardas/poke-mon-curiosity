@@ -1,6 +1,6 @@
 
 
-<h2>Project description:</h2>
+##Project description:
 https://careerfoundry.com full stack web developer course JavaScript app (introduction to JavaScript).
 
 The app fetches Pokémon and their data via API by request.
