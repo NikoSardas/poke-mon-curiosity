@@ -3,10 +3,10 @@
 ## Project description: (WIP)
 https://careerfoundry.com full stack web developer course JavaScript app (introduction to JavaScript).
 
-The app fetches Pokémon and their data via API by request.
-
+The app fetches and displays Pokémon data via API by request.
+![Screen Shot 9-8-2021 at 11 30 PM](https://user-images.githubusercontent.com/89710667/132617831-2c7ce6f6-aa1c-4b4f-b8d1-47173cf4f347.png)
 ### Stack
-The project involves: HTML/CSS/JavaScript/Bootstrap/jQuery<br>
+HTML/CSS/JavaScript/Bootstrap/jQuery<br>
 ### Validations
 jshint/Prettier<br>
 ### API
