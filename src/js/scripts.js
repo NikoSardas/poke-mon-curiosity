@@ -1,5 +1,3 @@
-//TODO try IIFE. style modal. next button.
-
 const pokemonRepository = (function () {
   const pokemonList = [];
   const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
