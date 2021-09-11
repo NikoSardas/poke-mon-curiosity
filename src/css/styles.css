@@ -114,6 +114,7 @@ a {
 .modal-footer button:focus {
   border-color: var(--button-border-color-hover);
   color: var(--button-color-hover);
+  background-color: var(--button-background-color-active);
 }
 
 .modal-header button:hover,
