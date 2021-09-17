@@ -15,7 +15,7 @@ const pokemonRepository = (function () {
       let results = await json.results;
       results.forEach(function (item) {
         const pokemon = {
-          name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
+          name: item.name,
           detailsUrl: item.url,
         };
         // send to add() for validations and to push into the array
@@ -165,7 +165,7 @@ const modal = (function () {
       pokemonObj[0].abilities.forEach(function (item) {
         let abilityListItem = document.createElement("li");
         document.querySelector("#abilities").appendChild(abilityListItem);
-        abilityListItem.innerText = item.ability.name;
+        abilityListItem.innerText = item.ability.name.charAt(0).toUpperCase() + item.ability.name.slice(1);
       });
       document.querySelector(".modal-content").classList.add("loaded");
     };
@@ -184,3 +184,4 @@ pokemonRepository.loadList().then(function (response) {
     pokemonRepository.addListItem
   );
 });
+
