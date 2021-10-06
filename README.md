@@ -1,6 +1,6 @@
 
 
-## Project description: (WIP)
+## Project description:
 https://careerfoundry.com full stack web developer course JavaScript app (introduction to JavaScript).
 
 The app fetches and displays Pokémon data via API by request.
