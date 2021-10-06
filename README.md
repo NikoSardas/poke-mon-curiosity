@@ -1,7 +1,7 @@
 # Poké-mon-Curiosity
 A Pokédex app.
 
-##Description:
+## Description:
 https://careerfoundry.com full stack web developer course JavaScript app (introduction to JavaScript).
 
 The app fetches and displays Pokémon data via API by request.
