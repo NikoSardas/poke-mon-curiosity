@@ -1,10 +1,14 @@
 const pokemonRepository = (function () {
-  const pokemonList = [];
+  let pokemonList = [];
   const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
+  function sortedList(){
+    return 
+  }
+  
   // return pokemonList
   function getList() {
-    return pokemonList;
+    return pokemonList.sort((a, b) => (a.name > b.name) ? 1 : -1);
   }
 
   async function loadList() {
