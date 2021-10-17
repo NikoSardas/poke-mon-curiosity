@@ -198,8 +198,8 @@ const helpers = (function(){
   
   function scrollFunction() {
     if (
-      document.body.scrollTop > 50 ||
-      document.documentElement.scrollTop > 50
+      document.body.scrollTop > 350 ||
+      document.documentElement.scrollTop > 350
     ) {
       scrollToTopBtn.style.display = "block";
     } else {
