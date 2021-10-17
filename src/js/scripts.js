@@ -189,3 +189,43 @@ pokemonRepository.loadList().then(function (response) {
   );
 });
 
+const helpers = (function(){
+  let scrollToTopBtn = document.getElementById("btn-back-to-top");
+
+  window.onscroll = function () {
+    scrollFunction();
+  };
+  
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 50 ||
+      document.documentElement.scrollTop > 50
+    ) {
+      scrollToTopBtn.style.display = "block";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  }
+  scrollToTopBtn.addEventListener("click", backToTop);
+  
+  function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  
+  let searchPokemon = document.querySelector("#searchBar");
+  
+  searchPokemon.addEventListener("input", function() {
+    const pokemonList = document.querySelectorAll(".group-list-item");
+    const upperCased = searchPokemon.value.toUpperCase();
+  
+    pokemonList.forEach(function (pokemon) {
+      if (pokemon.innerText.toUpperCase().indexOf(upperCased) > -1) {
+        pokemon.style.display = "block";
+      } else {
+        pokemon.style.display = "none";
+      }
+    });
+  });
+  
+})()

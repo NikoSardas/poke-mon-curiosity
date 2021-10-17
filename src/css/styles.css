@@ -160,4 +160,46 @@ a {
 #loadingMessage {
   width: 64px;
   height: 64px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#btn-back-to-top {
+  background-color: transparent;
+  border: 1px solid #dca151;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+}
+
+#btn-back-to-top img:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+#searchBar {
+  box-shadow: none;
+  color: var(--links-color);
+  font-family: var(--main-font);
+  color: #c28b4a;
+  background-color: transparent;
+}
+
+#portfolio-link {
+  text-decoration: none;
+  color: #45a3cb;
+  margin: 4px;
+}
+
+#portfolio-link:hover {
+  text-decoration: none;
+  color: #c28b4a;
+}
+#poke-image {
+  opacity: 0.5;
 }

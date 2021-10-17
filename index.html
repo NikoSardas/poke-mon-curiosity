@@ -1,82 +1,108 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="src/css/bootstrap.min.css">
-  <link rel="stylesheet" href="src/css/styles.css">
-  <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/x-icon">
-  <title>Niko Sardas - Poke-mon-Curiosity</title>
-</head>
+    <link rel="stylesheet" href="src/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <title>Niko Sardas - Poke-mon-Curiosity</title>
+  </head>
 
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="navbar-brand">Poke-mon-Curiosity</div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link disabled" href="#">Niko Sardas 2022</a>
-      <a class="nav-item nav-link link" href="https://www.nikosardas.com/" target="window">Portfolio <span
-              class="sr-only">link to
-            author's portfolio page</span></a>
-      <a class="nav-item nav-link link" href="https://github.com/NikoSardas" target="window">GitHub <span
-              class="sr-only">link to
-            author's GitHub page</span></a>
-      <a class="nav-item nav-link link" href="https://www.linkedin.com/in/niko-sardas-78316121b/"
-         target="window">linkedIn <span class="sr-only">link to author's linkedIn page</span></a>
-    </div>
-  </div>
-</nav>
-<div id="pokemon-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content container border-light">
-      <div class="modal-header">
-        <h2 class="modal-title"></h2>
-        <div id="pokemon-image-container" class="text-center"></div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">X</span>
-        </button>
-      </div>
-      <div class="modal-body row">
-        <div class="col-6">
-          <h5>Abilities</h5>
-          <ul id="abilities"></ul>
+  <body>
+    <a id="portfolio-link" href="https://www.nikosardas.com/" target="window"
+      >Niko Sardas
+      <span class="sr-only">link to author's portfolio page</span></a
+    >
+    <button id="btn-back-to-top" type="button" aria-label="Back to top">
+      <img src="img/arrow_upward.svg" />
+    </button>
+    <img
+      id="loadingMessage"
+      class="d-none"
+      src="img/loading-buffering.gif"
+      alt="LOADING.."
+    />
+    <nav
+      class="navbar justify-content-center navbar-expand-lg navbar-dark bg-dark"
+    >
+    <span class="navbar-brand">
+      <img id="poke-image" src="img/pokemon_image.png" width="200" height="100" alt="image of a curious pokemon">
+    </span>
+      <div class="navbar-brand">Poke-mon-Curiosity</div>
+      <form class="">
+        <input
+          type="search"
+          class="form-control form-control-sm rounded text-center"
+          id="searchBar"
+          placeholder="Find Pokémon"
+          aria-label="Find Pokémon"
+        />
+      </form>
+    </nav>
+    <div id="pokemon-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content container border-light">
+          <div class="modal-header">
+            <h2 class="modal-title"></h2>
+            <div id="pokemon-image-container" class="text-center"></div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <div class="col-6">
+              <h5>Abilities</h5>
+              <ul id="abilities"></ul>
+            </div>
+            <div class="col-6">
+              <h5>Details</h5>
+              <ul>
+                <li id="height"></li>
+                <li id="weight"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary modal-close-button"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
-        <div class="col-6">
-          <h5>Details</h5>
-          <ul>
-            <li id="height"></li>
-            <li id="weight"></li>
-          </ul>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary modal-close-button" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
-<div class="pokemon-button-list container">
-  <div id="pokemon-list" class="row">
-  </div>
-</div>
-<footer class="page-footer">
-  <img id="loadingMessage" class="d-none" src="img/loading-buffering.gif" alt="LOADING..">
-</footer>
-<script src="src/js/jquery-3.6.0.min.js"></script>
-<script src="src/js/popper.min.js"></script>
-<script src="src/js/bootstrap.min.js"></script>
-<script src="src/js/fetch.umd.js"></script>
-<script src="src/js/polyfill.min.js"></script>
-<script src="src/js/scripts.js"></script>
-</body>
+    <div class="pokemon-button-list container">
+      <div id="pokemon-list" class="row"></div>
+    </div>
 
+    <script src="src/js/jquery-3.6.0.min.js"></script>
+    <script src="src/js/popper.min.js"></script>
+    <script src="src/js/bootstrap.min.js"></script>
+    <script src="src/js/fetch.umd.js"></script>
+    <script src="src/js/polyfill.min.js"></script>
+    <script src="src/js/scripts.js"></script>
+  </body>
 </html>
