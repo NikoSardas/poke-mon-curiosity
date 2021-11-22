@@ -2,13 +2,13 @@ const pokemonRepository = (function () {
   let pokemonList = [];
   const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
-  function sortedList(){
-    return 
+  function sortedList() {
+    return;
   }
-  
+
   // return pokemonList
   function getList() {
-    return pokemonList.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    return pokemonList.sort((a, b) => (a.name > b.name ? 1 : -1));
   }
 
   async function loadList() {
@@ -169,7 +169,9 @@ const modal = (function () {
       pokemonObj[0].abilities.forEach(function (item) {
         let abilityListItem = document.createElement("li");
         document.querySelector("#abilities").appendChild(abilityListItem);
-        abilityListItem.innerText = item.ability.name.charAt(0).toUpperCase() + item.ability.name.slice(1);
+        abilityListItem.innerText =
+          item.ability.name.charAt(0).toUpperCase() +
+          item.ability.name.slice(1);
       });
       document.querySelector(".modal-content").classList.add("loaded");
     };
@@ -189,13 +191,13 @@ pokemonRepository.loadList().then(function (response) {
   );
 });
 
-const helpers = (function(){
+const helpers = (function () {
   let scrollToTopBtn = document.getElementById("btn-back-to-top");
 
   window.onscroll = function () {
     scrollFunction();
   };
-  
+
   function scrollFunction() {
     if (
       document.body.scrollTop > 350 ||
@@ -207,18 +209,18 @@ const helpers = (function(){
     }
   }
   scrollToTopBtn.addEventListener("click", backToTop);
-  
+
   function backToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-  
+
   let searchPokemon = document.querySelector("#searchBar");
-  
-  searchPokemon.addEventListener("input", function() {
+
+  searchPokemon.addEventListener("input", function () {
     const pokemonList = document.querySelectorAll(".group-list-item");
     const upperCased = searchPokemon.value.toUpperCase();
-  
+
     pokemonList.forEach(function (pokemon) {
       if (pokemon.innerText.toUpperCase().indexOf(upperCased) > -1) {
         pokemon.style.display = "block";
@@ -227,5 +229,4 @@ const helpers = (function(){
       }
     });
   });
-  
-})()
+})();
