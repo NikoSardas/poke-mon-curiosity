@@ -1,7 +1,10 @@
 # Poké-mon-Curiosity
+
 https://careerfoundry.com full stack web developer course JavaScript app.
 
 A Pokédex app.
+
+![4](https://user-images.githubusercontent.com/89710667/142881788-42575a22-bfc3-49bf-9b8b-555d7150a9d3.gif)
 
 ## Description:
 The app fetches and displays Pokémon data via API by request.
