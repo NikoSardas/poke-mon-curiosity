@@ -19,7 +19,7 @@ git clone https://github.com/NikoSardas/poke-mon-curiosity.git
 ```
 
 ```bash
-run index.html
+index.html
 ```
 
 ---
