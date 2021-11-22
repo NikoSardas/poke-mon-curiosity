@@ -7,7 +7,11 @@ A Pokédex app.
 The app fetches and displays Pokémon data via API by request.
 
 ## Built With
-HTML/CSS/JavaScript/Bootstrap/jQuery
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- jQuery
 
 ## API
 https://pokeapi.co/api/v2/pokemon/<br>
