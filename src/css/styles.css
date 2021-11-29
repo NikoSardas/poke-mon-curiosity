@@ -50,6 +50,10 @@ a {
   padding: 20px;
 }
 
+.container {
+  margin: 0 !important;
+}
+
 .modal {
   font-family: var(--main-font);
 }
@@ -58,7 +62,6 @@ a {
   min-height: 300px;
   opacity: 0;
   transition: opacity 0.5s;
-  width: 360px;
   background-color: var(--background-color);
   border: var(--button-border);
 }
