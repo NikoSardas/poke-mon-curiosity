@@ -1,21 +1,34 @@
 # Poké-mon-Curiosity
+
+https://careerfoundry.com full stack web developer course JavaScript app.
+
 A Pokédex app.
 
-## Description:
-https://careerfoundry.com full stack web developer course JavaScript app (introduction to JavaScript).
+![4](https://user-images.githubusercontent.com/89710667/142881788-42575a22-bfc3-49bf-9b8b-555d7150a9d3.gif)
 
+## Description:
 The app fetches and displays Pokémon data via API by request.
-![Screen Shot 9-17-2021 at 10 03 AM](https://user-images.githubusercontent.com/89710667/133795847-fceb3585-d78d-40e3-abc8-521abbb078a2.png)
 
 ## Built With
-HTML/CSS/JavaScript/Bootstrap/jQuery
-
-## Formatting / Validations
-jshint/Prettier
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- jQuery
 
 ## API
 https://pokeapi.co/api/v2/pokemon/<br>
 
+### CLI install and run
+```bash
+git clone https://github.com/NikoSardas/poke-mon-curiosity.git
+```
+
+```bash
+index.html
+```
+
+---
 ## Live app
 https://nikosardas.github.io/poke-mon-curiosity
 
