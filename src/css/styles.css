@@ -206,3 +206,6 @@ a {
 #poke-image {
   opacity: 0.5;
 }
+.pokemon-button-list{
+  margin: auto !important;
+}
