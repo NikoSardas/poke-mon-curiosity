@@ -130,15 +130,17 @@ a {
   box-shadow: none;
   width: 100%;
   padding: 20px 0;
-  margin: 2px;
+  margin: 2px 0;
   background-color: transparent;
   color: var(--links-color);
   font-family: var(--main-font);
   transition: 0.2s border-color;
 }
 
-.pokemon-button-list .row > * {
-  padding: 2px;
+@media all and (min-width: 600px) {
+  .pokemon-button-list .row > * {
+    padding: 2px;
+  }
 }
 
 #pokemon-list button:hover,
@@ -206,6 +208,6 @@ a {
 #poke-image {
   opacity: 0.5;
 }
-.pokemon-button-list{
+.pokemon-button-list {
   margin: auto !important;
 }

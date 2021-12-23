@@ -192,12 +192,13 @@ pokemonRepository.loadList().then(function (response) {
 });
 
 const helpers = (function () {
-  let scrollToTopBtn = document.getElementById("btn-back-to-top");
+  let scrollToTopBtn = document.getElementById("btn-back-to-top"),
+    searchPokemon = document.querySelector("#searchBar");
 
-  window.onscroll = function () {
-    scrollFunction();
-  };
-
+  function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
   function scrollFunction() {
     if (
       document.body.scrollTop > 350 ||
@@ -208,15 +209,11 @@ const helpers = (function () {
       scrollToTopBtn.style.display = "none";
     }
   }
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
   scrollToTopBtn.addEventListener("click", backToTop);
-
-  function backToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
-  let searchPokemon = document.querySelector("#searchBar");
-
   searchPokemon.addEventListener("input", function () {
     const pokemonList = document.querySelectorAll(".group-list-item");
     const upperCased = searchPokemon.value.toUpperCase();
